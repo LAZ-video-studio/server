@@ -1,16 +1,18 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import { Server } from "socket.io";
-import { handle } from "./network/packetprocessor.js";
-import { getPacketByID } from "./network/protocol.js";
+import { handle } from "./network/protocol.js";
+//import { getProtocolVersion, getGameVersion, getServerVersion } from "./network/protocol.js";
 
-export const io = new Server(12312);
-
-console.log('PowerSturnus Lite v0.0.1 on ');
-console.log('For ');
+const port = readConfigFile('Port');
+const io = new Server(port);
 
 io.on("connection", (socket) => {
 	socket.on("UNCONNECTED_PING", (data) => {
-		handle('unconnectedPong');
+		handle(1, data);
+		//console.log(socket.client.id);
+	});
+	socket.on("CONNECTED_PING", (data) => {
+		//handle('connectedPong');
 	});
 });
 
@@ -19,6 +21,6 @@ export function readConfigFile(settings){
     return file[settings];
 }
 
-export function send(packetid, packet){
-	io.emit(getPacketByID(packetid), JSON.stringify(packet));
+export function sendPacket(packet, data){
+	io.emit(packet, data);
 }

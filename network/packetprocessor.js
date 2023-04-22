@@ -1,13 +1,13 @@
-import { send } from "../server.js";
+import { sendPacket } from "../server.js";
+import { getPacketByID } from "./protocol.js";
 
-import { handleunconnectedPong } from "./packets/unconnectedPong.js";
-
-export function handle(packet) {
-	if (packet == 'unconnectedPong'){
-		handleunconnectedPong();
-	}
+export function processEncode(packetid, packetdata) {
+	var packet = getPacketByID(packetid);
+	var data = JSON.stringify(packetdata);
+	sendPacket(packet, data);
 }
 
-export function process(packetid, packet) {
-	send(packetid, packet);
+export function processDecode(data) {
+	const output = JSON.parse(data);
+	return output;
 }

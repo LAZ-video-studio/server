@@ -1,10 +1,10 @@
 import { sendPacket } from "../server.js";
 import { getPacketByID } from "./protocol.js";
 
-export function processEncode(packetid, packetdata) {
+export function processEncode(packetid, socket, packetdata) {
 	var packet = getPacketByID(packetid);
 	var data = JSON.stringify(packetdata);
-	sendPacket(packet, data);
+	sendPacket(packet, socket, data);
 }
 
 export function processDecode(data) {

@@ -1,4 +1,5 @@
 import { handlePacket as UNCONNECTED_PONG } from "./packets/unconnectedPong.js";
+import { handlePacket as LOGIN_PACKET } from "./packets/loginPacket.js";
 
 var currentprotocol = 7;
 var currentserver = "0.2.1";
@@ -8,6 +9,9 @@ export function getPacketByID(id) {
 	switch (id) {
 		case 1:
 			return "UNCONNECTED_PONG";
+	}
+		case 3:
+			return "LOGIN_PACKET";
 	}
 }
 
@@ -23,8 +27,8 @@ export function getServerVersion() {
 	return currentserver;
 }
 
-export function handle(packet, data) {
+export function handle(packet, data, socket) {
 	var packetname = getPacketByID(packet);
 	var packet = eval(packetname);
-	packet(data);
+	packet(data, socket);
 }

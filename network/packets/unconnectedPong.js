@@ -7,6 +7,8 @@ const serverName = readConfigFile('ServerName');
 
 var input = {};
 var output = {};
+var clientHost;
+var clientPort;
 	
 export function encode() {
 	input.protocol = '7';
@@ -16,6 +18,8 @@ export function encode() {
 }
 
 export function decode() {
+	clientHost = output.host;
+	clientPort = output.port;
 }
 
-export function handlePacket(data) {output = processDecode(data); encode(); decode(); processEncode(packetid, input);}
+export function handlePacket(data, socket) {output = processDecode(data); encode(); decode(); processEncode(packetid, socket, input);}

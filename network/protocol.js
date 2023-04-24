@@ -9,7 +9,6 @@ export function getPacketByID(id) {
 	switch (id) {
 		case 1:
 			return "UNCONNECTED_PONG";
-	}
 		case 3:
 			return "LOGIN_PACKET";
 	}
@@ -29,6 +28,6 @@ export function getServerVersion() {
 
 export function handle(packet, data, socket) {
 	var packetname = getPacketByID(packet);
-	var packet = eval(packetname);
+	var packet = eval(packetname);  //todo: alternative to eval in this case?
 	packet(data, socket);
 }

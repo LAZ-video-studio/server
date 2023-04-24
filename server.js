@@ -5,7 +5,7 @@ import { handle } from "./network/protocol.js";
 //import { getProtocolVersion, getGameVersion, getServerVersion } from "./network/protocol.js";
 
 const server = dgram.createSocket('udp4');
-const magic = new Buffer.from('A01');
+const magic = new Buffer.from('A0101010101A01');
 const port = readConfigFile('Port');
 const io = new Server(port);
 

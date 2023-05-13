@@ -1,9 +1,11 @@
 {
   "type": "module",
-  "dependencies": {
-    "socket.io": "^4.6.1"
-  },
   "pkg": {
-    "options": ["experimental-modules"]
+    "options": [
+      "experimental-modules"
+    ]
+  },
+  "dependencies": {
+    "socket.io": "^2.1.1"
   }
 }

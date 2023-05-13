@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import dgram from 'node:dgram';
-import { Server } from "socket.io";
+import Server from "socket.io";
 import { handle } from "./network/protocol.js";
 //import { getProtocolVersion, getGameVersion, getServerVersion } from "./network/protocol.js";
 
@@ -28,7 +28,8 @@ export function sendPacket(packet, socket, data){
 }
 
 server.on('listening', function () {
+	console.log("list");
 	server.setBroadcast(true);
-	setInterval(function () {server.send(magic, 0, magic.length, 7890, '255.255.255.255')}, 5000);
+	setInterval(function () {server.send(magic, 0, magic.length, 7890, '255.255.255.255')}, 5000); //broadcast server to LAN
 });
 server.bind('8888');
